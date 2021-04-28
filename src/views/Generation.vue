@@ -9,7 +9,7 @@
     <hr />
     <h2>Especies de Pokemons</h2>
     <div v-for="(poke, index) in generation.pokemonSpecies" :key="index">
-      {{ index }} - {{ poke.name }}
+      {{ index }} - {{ poke.name }} | {{ poke.url }}
     </div>
   </div>
 </template>
@@ -25,6 +25,7 @@ export default {
         name: "",
         qntPokemons: "",
         types: [],
+        imagens: [],
         pokemonSpecies: [],
       },
     };
@@ -45,9 +46,19 @@ export default {
         console.warn(err);
       }
     },
+
+    async fetchPokemonsImgs() {
+      try {
+        const imgs = await api.get(this.poke.url);
+        console.log(imgs);
+      } catch (err) {
+        console.warn(err);
+      }
+    },
   },
   created() {
     this.fetchPokemons();
+    this.fetchPokemonsImgs();
   },
 };
 </script>
