@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <div v-for="(generation, index) in generations" :key="index">
+    <div v-for="(generation, index) in generationsList" :key="index">
       <router-link :to="`/generation/${urlId[generation.name]}`">
         <div class="wrapper">
           <div class="figure">
@@ -19,7 +19,7 @@ export default {
   name: "Card",
   data() {
     return {
-      generations: [],
+      generationsList: [],
       urlId: {},
     };
   },
@@ -27,8 +27,8 @@ export default {
     async fetchGenerations() {
       try {
         const generation = await api.get("/generation");
-        this.generations = generation.data.results;
-        this.urlId = this.generations.reduce(
+        this.generationsList = generation.data.results;
+        this.urlId = this.generationsList.reduce(
           (acc, cur, index) => (acc = { ...acc, [cur.name]: index + 1 }),
           {}
         );

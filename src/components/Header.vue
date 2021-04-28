@@ -1,7 +1,7 @@
 <template>
   <header>
     <div class="container">
-      <img src="../assets/logo.svg" width="112" height="41" />
+      <img src="../assets/logo.svg" width="112" height="41" @click="goHome" />
       <input type="text" placeholder="Digite sua busca" />
       <div class="profile">
         <img src="../assets/profile.svg" />
@@ -10,6 +10,17 @@
     </div>
   </header>
 </template>
+
+<script>
+export default {
+  name: "Header",
+  methods: {
+    goHome() {
+      return this.$router.push("/");
+    },
+  },
+};
+</script>
 
 <style lang="scss" scoped>
 header {
@@ -26,6 +37,7 @@ header {
     align-items: center;
 
     img {
+      cursor: pointer;
       @media screen and (max-width: 600px) {
         margin-bottom: 10px;
       }
